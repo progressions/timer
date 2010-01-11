@@ -1,3 +1,5 @@
+require 'g'
+
 module Timer
   def time(message="")
     start_time = Time.now
@@ -31,10 +33,6 @@ module Timer
     e = message + e
     e += "Elapsed time: #{elapsed_time}"
     puts e
-    begin
-      g(e)
-    rescue StandardError => e
-      # deal with this gracefully soon
-    end
+    g(e)
   end
 end
