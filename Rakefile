@@ -5,12 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "timer"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Simple timer to perform a block and display the elapsed time}
+    gem.description = %Q{Simple timer to perform a block and display the elapsed time}
     gem.email = "progressions@gmail.com"
     gem.homepage = "http://github.com/progressions/timer"
     gem.authors = ["Jeff Coleman"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
