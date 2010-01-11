@@ -2,43 +2,42 @@ require 'rubygems'
 require 'g'
 
 class Timer
-  attr_accessor :timer_title, :growl
+  attr_accessor :title, :growl
   
   def initialize(options={})
-    @timer_title = options[:title]
-    if options[:growl] == nil
-      options[:growl] = true
+    @title = options[:title]
+    @growl = true
+    if options.has_key?(:growl)
+      @growl = options[:growl]
     end
-    @growl = options[:growl]
   end
   
   def time(message="", options={})
-    title = options[:title] || timer_title
+    current_title = options[:title] || title
     
     start_time = Time.now
     yield
     end_time = Time.now
-    put_elapsed_time(start_time, end_time, message, title)
+    put_elapsed_time(start_time, end_time, message, current_title)
   end
-  
-  private
   
   def growl?
     @growl
   end
+  
+  private
 
-  def put_elapsed_time(start_time, end_time, message="", title=nil)
+  def put_elapsed_time(start_time, end_time, message="", current_title=nil)
     elapsed_time = format_time(start_time, end_time)
 
-    puts
     e = ""
     if message.to_s.strip != ""
       message += ". "
     end
     e = message + e
     e += "Elapsed time: #{elapsed_time}"
-    puts e
-    growl(e, title)
+    $stdout.puts "\n" + e
+    growl(e, current_title)
   end
   
   def format_time(start_time, end_time=nil)
@@ -47,23 +46,26 @@ class Timer
     if seconds > 59
       minutes = seconds / 60.0
       seconds = (minutes - minutes.to_i) * 60
+      m = minutes.to_i
+      s = seconds.to_i
 
-      m = minutes.to_i > 1 ? "minutes" : "minute"
-      elapsed_time = "#{minutes.to_i} #{m}"
-      if seconds > 0
-        s = seconds.to_i > 1 ? "seconds" : "minutes"
-        elapsed_time += ", #{seconds.to_i} #{s}"
+      minutes_msg = m != 1 ? "minutes" : "minute"
+      elapsed_time = "#{m} #{minutes_msg}"
+      if s > 0
+        seconds_msg = s != 1 ? "seconds" : "second"
+        elapsed_time += ", #{s} #{seconds_msg}"
       end
     else
-      s = seconds.to_i > 1 ? "seconds" : "minutes"
+      s = seconds.to_i != 1 ? "seconds" : "second"
       elapsed_time = "#{seconds.to_i} #{s}"
-    end    
+    end
+    elapsed_time
   end
   
-  def growl(message, title)
+  def growl(message, current_title)
     if growl?
       if title
-        g(message, :title => title)
+        g(message, :title => current_title)
       else
         g(message)
       end
