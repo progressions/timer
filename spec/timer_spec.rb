@@ -10,11 +10,32 @@ describe "Timer" do
     Growl.stub(:new).and_return(@g)
     @g.stub(:notify).as_null_object
   end
-
-  it "growls a message" do
-    @g.should_receive(:notify).with(anything, anything, /hello/, anything, anything)
-    Timer.new.time("hello") do
-      x = 1
+  
+  describe "growl" do
+    it "should growl a message" do
+      @g.should_receive(:notify).with(anything, anything, /hello/, anything, anything)
+      Timer.new.time("hello") do
+        x = 1
+      end
+    end
+  
+    it "should growl a title" do
+      @g.should_receive(:notify).with(anything, /word/, anything, anything, anything)
+      Timer.new(:title => "word").time("hello") do
+        x = 1
+      end
+    end
+  
+    it "should turn off growl" do
+      @timer = Timer.new(:growl => false)
+      @timer.growl?.should be_false
+    end
+  
+    it "shouldn't growl a message" do
+      Growl.should_not_receive(:new)
+      Timer.new(:growl => false).time("hello") do
+        x = 1
+      end
     end
   end
   
@@ -24,25 +45,6 @@ describe "Timer" do
       x = 1
     end
   end
-  
-  it "growls a title" do
-    @g.should_receive(:notify).with(anything, /word/, anything, anything, anything)
-    Timer.new(:title => "word").time("hello") do
-      x = 1
-    end
-  end
-  
-  it "turns off growl" do
-    @timer = Timer.new(:growl => false)
-    @timer.growl?.should be_false
-  end
-  
-  it "doesn't growl a message" do
-    Growl.should_not_receive(:new)
-    Timer.new(:growl => false).time("hello") do
-      x = 1
-    end
-  end  
   
   it "sets the title" do
     Timer.new(:title => "YO").title.should == "YO"
