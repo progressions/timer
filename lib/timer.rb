@@ -2,14 +2,16 @@ require 'rubygems'
 require 'g'
 
 module Timer
-  def time(message="")
+  def time(message="", options={})
+    title = options[:title] || ""
+    
     start_time = Time.now
     yield
     end_time = Time.now
-    put_elapsed_time(start_time, end_time, message)
+    put_elapsed_time(start_time, end_time, message, title)
   end
 
-  def put_elapsed_time(start_time, end_time, message="")
+  def put_elapsed_time(start_time, end_time, message="", title=nil)
     seconds = end_time - start_time
     if seconds > 59
       minutes = seconds / 60.0
@@ -34,6 +36,15 @@ module Timer
     e = message + e
     e += "Elapsed time: #{elapsed_time}"
     puts e
-    g(e)
+    if title
+      g(e, :title => title)
+    else
+      g(e)
+    end
+  rescue StandardError => e
+    # growl isn't turned on, fail silently
+    unless e.message =~ /Connection refused/
+      raise e
+    end
   end
 end
