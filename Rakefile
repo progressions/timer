@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "timer"
     gem.summary = %Q{Simple timer to perform a block and display the elapsed time}
-    gem.description = %Q{Simple timer to perform a block and display the elapsed time}
+    gem.description = %Q{Simple timer to perform a block and display the elapsed time. Growls message if growl is turned on.}
     gem.email = "progressions@gmail.com"
     gem.homepage = "http://github.com/progressions/timer"
     gem.authors = ["Jeff Coleman"]
