@@ -10,6 +10,8 @@ begin
     gem.email = "progressions@gmail.com"
     gem.homepage = "http://github.com/progressions/timer"
     gem.authors = ["Jeff Coleman"]
+    gem.add_development_dependency "ruby-growl", ">= 0"
+    gem.add_development_dependency "progressions-g", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

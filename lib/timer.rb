@@ -25,12 +25,16 @@ module Timer
 
     puts
     e = ""
-    unless message.blank?
+    if message.strip != ""
       message += ". "
     end
     e = message + e
     e += "Elapsed time: #{elapsed_time}"
     puts e
-    g(e)
-  end    
+    begin
+      g(e)
+    rescue StandardError => e
+      # deal with this gracefully soon
+    end
+  end
 end
