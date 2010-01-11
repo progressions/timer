@@ -37,6 +37,24 @@ describe "Timer" do
         x = 1
       end
     end
+    
+    it "should fail gracefully if growl is off" do
+      @g.should_receive(:notify).and_raise("Connection refused: send(2)")
+      lambda {
+        Timer.new.time("hello") do
+          x = 1
+        end
+      }.should_not raise_error
+    end
+    
+    it "should raise other exceptions" do
+      @g.should_receive(:notify).and_raise("Something else")
+      lambda {
+        Timer.new.time("hello") do
+          x = 1
+        end
+      }.should raise_error("Something else")
+    end
   end
   
   it "puts a message" do
@@ -46,21 +64,23 @@ describe "Timer" do
     end
   end
   
-  it "sets the title" do
-    Timer.new(:title => "YO").title.should == "YO"
-  end
+  describe "title" do
+    it "should set the title" do
+      Timer.new(:title => "YO").title.should == "YO"
+    end
   
-  it "resets the title" do
-    @timer = Timer.new(:title => "YO")
-    @timer.title = "HEY"
-    @timer.title.should == "HEY"
-  end
+    it "shuld reset the title" do
+      @timer = Timer.new(:title => "YO")
+      @timer.title = "HEY"
+      @timer.title.should == "HEY"
+    end
   
-  it "overrides the title" do
-    @g.should_receive(:notify).with(anything, /YEAH/, anything, anything, anything)
-    @timer = Timer.new(:title => "word")
-    @timer.time("hello", :title => "YEAH") do
-      x = 1
+    it "should override the title" do
+      @g.should_receive(:notify).with(anything, /YEAH/, anything, anything, anything)
+      @timer = Timer.new(:title => "word")
+      @timer.time("hello", :title => "YEAH") do
+        x = 1
+      end
     end
   end
   
