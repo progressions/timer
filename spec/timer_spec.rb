@@ -12,6 +12,7 @@ describe "Timer" do
   end
   
   describe "growl" do
+    
     it "should growl a message" do
       @g.should_receive(:notify).with(anything, anything, /hello/, anything, anything)
       Timer.new.time("hello") do
@@ -57,7 +58,7 @@ describe "Timer" do
     end
   end
   
-  it "puts a message" do
+  it "should put a message" do
     $stdout.should_receive(:puts).with(/hello/)
     Timer.new.time("hello") do
       x = 1
@@ -84,14 +85,55 @@ describe "Timer" do
     end
   end
   
+  describe "raising exceptions" do
+    before(:each) do
+      @timer = Timer.new
+    end
+    
+    it "should re-raise an exception" do
+      lambda {
+        @timer.time("hello") do
+          raise "Exception"
+        end
+      }.should raise_error("Exception")
+    end
+    
+    it "should growl a message" do
+      @g.should_receive(:notify).with(anything, anything, /hello/, anything, anything)
+      lambda {
+        @timer.time("hello") do
+          raise "Exception"
+        end
+      }.should raise_error("Exception")
+    end
+    
+    it "should growl a title" do
+      @g.should_receive(:notify).with(anything, /word/, anything, anything, anything)
+      lambda {
+        Timer.new(:title => "word").time("hello") do
+          raise "Exception"
+        end
+      }.should raise_error("Exception")
+    end
+    
+    it "should put a message" do
+      $stdout.should_receive(:puts).with(/hello/)
+      lambda {
+        @timer.time("hello") do
+          raise "Exception"
+        end
+      }.should raise_error("Exception")
+    end
+  end
+  
   describe "timing the action" do
     before(:each) do
       Timecop.return
+      @timer = Timer.new
     end
     
     it "should report seconds" do
       @g.should_receive(:notify).with(anything, anything, /Elapsed time: 3 seconds\"\n$/, anything, anything)
-      @timer = Timer.new
       @timer.time("hello") do
         Timecop.freeze(Time.now + 3)
       end
@@ -99,7 +141,6 @@ describe "Timer" do
     
     it "should report only minutes when it's even" do
       @g.should_receive(:notify).with(anything, anything, /Elapsed time: 2 minutes\"\n$/, anything, anything)
-      @timer = Timer.new
       @timer.time("hello") do
         Timecop.freeze(Time.now + 120)
       end
@@ -107,7 +148,6 @@ describe "Timer" do
     
     it "should report minutes and seconds" do
       @g.should_receive(:notify).with(anything, anything, /Elapsed time: 1 minute, 14 seconds\"\n$/, anything, anything)
-      @timer = Timer.new
       @timer.time("hello") do
         Timecop.freeze(Time.now + 74)
       end
