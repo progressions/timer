@@ -16,9 +16,13 @@ class Timer
     current_title = options[:title] || title
     
     start_time = Time.now
-    yield
-    end_time = Time.now
-    put_elapsed_time(start_time, end_time, message, current_title)
+    begin
+      yield
+    rescue StandardError => e
+      put_elapsed_time(start_time, Time.now, message, current_title)
+      raise e
+    end
+    put_elapsed_time(start_time, Time.now, message, current_title)
   end
   
   def growl?
