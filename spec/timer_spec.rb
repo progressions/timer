@@ -12,7 +12,6 @@ describe "Timer" do
   end
   
   describe "growl" do
-    
     it "should growl a message" do
       @g.should_receive(:notify).with(anything, anything, /hello/, anything, anything)
       Timer.new.time("hello") do
@@ -123,6 +122,18 @@ describe "Timer" do
           raise "Exception"
         end
       }.should raise_error("Exception")
+    end
+    
+    it "should report elapsed time" do
+      Timecop.return
+      @g.should_receive(:notify).with(anything, anything, /Elapsed time: 2 minutes\"\n$/, anything, anything)
+      lambda {
+        @timer.time("hello") do
+          Timecop.freeze(Time.now + 120)
+          raise "Exception"
+        end
+      }.should raise_error("Exception")
+      Timecop.return
     end
   end
   
