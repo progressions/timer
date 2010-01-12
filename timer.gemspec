@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{timer}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Coleman"]
-  s.date = %q{2010-01-11}
+  s.date = %q{2010-01-12}
   s.description = %q{Simple timer to perform a block and display the elapsed time. Growls message if growl is turned on.}
   s.email = %q{progressions@gmail.com}
   s.extra_rdoc_files = [
