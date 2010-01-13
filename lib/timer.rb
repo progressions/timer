@@ -19,10 +19,9 @@ class Timer
     begin
       yield
     rescue StandardError => e
-      put_elapsed_time(start_time, Time.now, message, current_title)
-      raise e
     end
     put_elapsed_time(start_time, Time.now, message, current_title)
+    raise e if e
   end
   
   def growl?
