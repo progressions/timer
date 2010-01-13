@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{timer}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Coleman"]
-  s.date = %q{2010-01-12}
+  s.date = %q{2010-01-13}
   s.description = %q{Simple timer to perform a block and display the elapsed time. Growls message if growl is turned on.}
   s.email = %q{progressions@gmail.com}
   s.extra_rdoc_files = [
@@ -45,17 +45,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<progressions-g>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<timecop>, [">= 0"])
+      s.add_development_dependency(%q<natural_time>, [">= 0"])
     else
       s.add_dependency(%q<ruby-growl>, [">= 0"])
       s.add_dependency(%q<progressions-g>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<timecop>, [">= 0"])
+      s.add_dependency(%q<natural_time>, [">= 0"])
     end
   else
     s.add_dependency(%q<ruby-growl>, [">= 0"])
     s.add_dependency(%q<progressions-g>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<timecop>, [">= 0"])
+    s.add_dependency(%q<natural_time>, [">= 0"])
   end
 end
 
