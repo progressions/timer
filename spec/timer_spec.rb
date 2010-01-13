@@ -158,7 +158,7 @@ describe "Timer" do
     end
     
     it "should report minutes and seconds" do
-      @g.should_receive(:notify).with(anything, anything, /Elapsed time: 1 minute, 14 seconds\"\n$/, anything, anything)
+      @g.should_receive(:notify).with(anything, anything, /Elapsed time: 1 minute and 14 seconds\"\n$/, anything, anything)
       @timer.time("hello") do
         Timecop.freeze(Time.now + 74)
       end
