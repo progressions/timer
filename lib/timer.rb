@@ -20,6 +20,7 @@ class Timer
     begin
       yield
     rescue StandardError => e
+      put_elapsed_time(start_time, Time.now, e.message, current_title)
     end
     put_elapsed_time(start_time, Time.now, message, current_title)
     raise e if e

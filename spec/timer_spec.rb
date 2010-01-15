@@ -115,8 +115,8 @@ describe "Timer" do
       }.should raise_error("Exception")
     end
     
-    it "should put a message" do
-      $stdout.should_receive(:puts).with(/hello/)
+    it "should put the exception" do
+      $stdout.should_receive(:puts).with(/Exception/)
       lambda {
         @timer.time("hello") do
           raise "Exception"
