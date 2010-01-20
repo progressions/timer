@@ -1,6 +1,25 @@
 = timer
 
-Description goes here.
+Simple timer to display elapsed time of a block.
+
+== Usage
+
+1. Instantiate timer with optional Growl message timer.
+
+  timer = Timer.new(:title => "My Timer")
+
+2. Call the timer with a block and optional message to output.
+
+  timer.time("The block has finished executing!") do
+    # some code in here
+  end
+
+== Options
+
+Timer.new takes two optional parameters:
+
+  [title]   (string) Growl message title
+  [growl]   (boolean) Turn Growl messaging off. It is on by default.
 
 == Note on Patches/Pull Requests
  
