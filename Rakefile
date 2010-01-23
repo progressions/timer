@@ -32,10 +32,16 @@ end
 Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.pattern = 'spec/**/*_spec.rb'
+  spec.rcov_opts = ['--exclude', '.gem,Library,spec', '--sort', 'coverage']
   spec.rcov = true
 end
 
-task :spec => :check_dependencies
+task :bundle do
+  require 'vendor/gems/environment'
+  Bundler.require_env
+end
+
+task :spec => [:bundle, :check_dependencies]
 
 task :default => :spec
 
@@ -44,7 +50,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "translator #{version}"
+  rdoc.title = "YMDP #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
