@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem "ruby-growl", ">= 0"
 gem "progressions-g", ">= 0"
