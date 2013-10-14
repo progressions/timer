@@ -14,15 +14,8 @@ Simple timer to display elapsed time of a block.
     # some code in here
   end
 
-== Options
-
-Timer.new takes two optional parameters:
-
-  [title]   (string) Growl message title
-  [growl]   (boolean) Turn Growl messaging off. It is on by default.
-
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
@@ -33,4 +26,4 @@ Timer.new takes two optional parameters:
 
 == Copyright
 
-Copyright (c) 2010 Jeff Coleman. See LICENSE for details.
+Copyright (c) 2013 Isaac Priestley. See LICENSE for details.
