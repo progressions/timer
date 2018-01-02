@@ -4,11 +4,11 @@ Simple timer to display elapsed time of a block.
 
 ## Usage
 
-1. Instantiate timer with optional Growl message timer.
+Instantiate timer with optional Growl message timer.
 
     timer = Timer.new(:title => "My Timer")
 
-2. Call the timer with a block and optional message to output.
+Call the timer with a block and optional message to output.
 
     timer.time("The block has finished executing!") do
       # some code in here
