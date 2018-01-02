@@ -1,9 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem "activesupport", :require => "active_support"
-gem "natural_time", ">= 0"
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-group :test do
-  gem "rspec", ">= 0"
-  gem "timecop", ">= 0"
-end
+# Specify your gem's dependencies in timer.gemspec
+gemspec

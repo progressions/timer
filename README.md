@@ -1,20 +1,20 @@
-= timer
+# Timer
 
 Simple timer to display elapsed time of a block.
 
-== Usage
+## Usage
 
 1. Instantiate timer with optional Growl message timer.
 
-  timer = Timer.new(:title => "My Timer")
+    timer = Timer.new(:title => "My Timer")
 
 2. Call the timer with a block and optional message to output.
 
-  timer.time("The block has finished executing!") do
-    # some code in here
-  end
+    timer.time("The block has finished executing!") do
+      # some code in here
+    end
 
-== Note on Patches/Pull Requests
+## Note on Patches/Pull Requests
 
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -24,6 +24,6 @@ Simple timer to display elapsed time of a block.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+## Copyright
 
-Copyright (c) 2013 Isaac Priestley. See LICENSE for details.
+Copyright (c) 2018 Isaac Priestley. See LICENSE for details.

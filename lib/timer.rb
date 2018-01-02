@@ -1,5 +1,5 @@
-require 'rubygems'
-require 'natural_time'
+require "timer/version"
+require "natural_time"
 
 class Timer
   attr_accessor :title
